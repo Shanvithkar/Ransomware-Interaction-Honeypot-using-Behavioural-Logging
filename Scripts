@@ -1,1 +1,46 @@
+Interaction counter.py
+import json
+
+count = 0
+
+with open("var/log/cowrie/cowrie.json") as f:
+    for line in f:
+        count += 1
+
+print("Total interactions:", count)
+
+output: Total Interaction 19
+
+Timeline Generator.py
+import json
+
+with open("var/log/cowrie/cowrie.json") as f:
+    for line in f:
+        data = json.loads(line)
+
+        if "timestamp" in data:
+            print(data["timestamp"])
+
+output:
+2026-05-27T06:31:39.855553Z
+2026-05-27T06:35:37.406230Z
+2026-05-27T06:35:52.624085Z
+
+
+Entropy_plot.py
+import matplotlib.pyplot as plt
+
+activities = ["Login Attempts", "Commands", "Downloads"]
+counts = [5, 10, 4]
+
+plt.bar(activities, counts)
+
+plt.xlabel("Activity Type")
+plt.ylabel("Count")
+plt.title("Attacker Behaviour Analysis")
+
+plt.show()
+
+output: you will see a graph
+
 
